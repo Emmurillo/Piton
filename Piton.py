@@ -12,7 +12,7 @@ class Micro(cmd.Cmd):
     def __init__(self):
         cmd.Cmd.__init__(self)
         self.prompt = "--> "
-        self.intro  = "Piton- 1.0"
+        self.intro  = "Piton 1.0"
  
     def do_exit(self, args):
         return -1

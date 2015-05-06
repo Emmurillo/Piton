@@ -1,6 +1,6 @@
 #------------------------------------------------------------
 # PitonYacc.py
-# Grammar rules for Piton- programming language
+# Grammar rules for Piton programming language
 #
 # Parser
 # Written by: Esteban & Emmanuel Murillo
