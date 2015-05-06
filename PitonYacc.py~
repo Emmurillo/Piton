@@ -1,6 +1,6 @@
 #------------------------------------------------------------
 # PitonYacc.py
-# Grammar rules for Piton- programming language
+# Grammar rules for Piton programming language
 #
 # Parser
 # Written by: Esteban & Emmanuel Murillo
@@ -18,5 +18,16 @@ names = {}
 
 # Falta declarar todas las reglas gramaticales
 
-
+def p_program(p):
+	'program : LPAREN statementlist RPAREN'
+	p[0] = p[2]
+	
+def p_statementlist_empty(p):
+	'statementlist : empty'
+	p[0] = []
+	
+def p_empty(p):
+	'empty :'
+	pass
+	
 yacc.yacc()
