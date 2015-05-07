@@ -7,7 +7,6 @@
 # ------------------------------------------------------------
 
 import ply.lex as lex
-import sys
 
 # Palabras reservadas
 reserved = {
@@ -35,7 +34,7 @@ reserved = {
 }
 
 # Tokens
-tokens = ['LPAREN', 'RPAREN', 'LBRACKET', 'RBRACKET', 'ASSIGNMENT', 'COMP', 'LESS', 'LESSEQ', 'GREATER', 'GREATEREQ', 'PLUS', 'MINUS', 'STAR', 'SLASH', 'PLUSEQ', 'MINUSEQ', 'STAREQ', 'SLASHEQ', 'COLON', 'COMMA', 'STRING', 'ID', 'INT'] + list(reserved.values())
+tokens = ['LPAREN', 'RPAREN', 'LBRACKET', 'RBRACKET', 'ASSIGNMENT', 'COMP', 'LESS', 'LESSEQ', 'GREATER', 'GREATEREQ', 'PLUS', 'MINUS', 'STAR', 'SLASH', 'PLUSEQ', 'MINUSEQ', 'STAREQ', 'SLASHEQ', 'COLON', 'COMMA', 'STRING', 'RESERVED', 'ID', 'INT'] + list(reserved.values())
 	
 # Expresiones regulares de los tokens
 t_LPAREN		=		r'\('
@@ -60,43 +59,71 @@ t_COLON			= 		r'\:'
 t_COMMA			=		r'\,'
 t_STRING 		= 		r'\".*\"'
 
+# Revisar cada una de las palabras reservadas
+def t_RESERVED(t):
+    r'[a-zA-Z][\w]*'
+    t.type = reserved.get(t.value, 'ID')    
+    return t
+
 # Expresion regular para los ID's
 def t_ID(t):
 	r'[a-zA-Z_][a-zA-Z_0-9]*' 
 	return t
 
+# Expresion regular para los enteros
 def t_INT(t):
     r"\d+"
     t.value = int(t.value)
     return t
     
-t_ignore = r' '
+# Expresiones regulares de las palabras reservadas
+t_DEFINA		=		r'[defina]'
+t_SI			=		r'[si]'
+t_SINO			=		r'[sino]'
+t_PARA			= 		r'[para]'
+t_MIENTRAS		=		r'[mientras]'
+t_RETORNE		=		r'[retorne]'
+t_INTERRUPTOR	=		r'[interruptor]'
+t_CASO			=		r'[caso]'
+t_RANGO			=		r'[rango]'
+t_PARE			=		r'[pare]'
+t_ANEXAR		=		r'[anexar]'
+t_ALEATORIO		=		r'[aleatorio]'
+t_ELEVAR		=		r'[elevar]'
+t_RAIZC			=		r'[raizc]'
+t_MOSTRAR		=		r'[mostrar]'
+t_LARGO			=		r'[largo]'
+t_LANZAR		=		r'[lanzar]'
+t_VERDADERO		=		r'[Verdadero]'
+t_FALSO			=		r'[Falso]'
+t_AND			=		r'[and]'
+t_OR			=		r'[or]'
+
+# Para ignorar los espacios en blanco
+t_ignore 		= 		r' '
 
 def t_error(t):
+	t.lexer.skip(1)
 	raise TypeError("Caracter invalido '%s'" % t.value[0])
 	
+# Para llevar control del numero de linea que se lee, asi se indica en caso de error
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += t.value.count("\n")
+    
+# Para ignorar los comentarios
+def t_COMMENT(t):
+    r'\#.*'
+    pass
 	
+# Se lee uno de los programas	
 lex.lex()
-
-'''for i in range (10):
-	name = "ExampleProgram"
-	name += str(i) + ".py"
-	try:
-		fo = open(name, "r")
-		
-	except IOError as e:
-		print "No se encontro el archivo con nombre", name'''
-		
-fo = open("ExamplePrograms/ExampleProgram0.py", "r")		
+fo = open("ExamplePrograms/ExampleProgram1.py", "r")		
 lex.input(fo.read())
+
 try:
 	for tok in iter(lex.token, None):
-		print (tok.type), (tok.value)
+		print repr(tok.type), ":", repr(tok.value)
 except TypeError as e:
-	print "Error en la linea", tok.lineno, "posicion", tok.lexpos
+	print "Error en la linea", tok.lineno
 	print e
-	
-
