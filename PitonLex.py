@@ -127,7 +127,7 @@ def t_COMMENT(t):
 	
 # Se lee uno de los programas	
 lex.lex()
-fo = open("Examples/Example4.pi", "r")		
+fo = open("Examples/Example5.pi", "r")		
 lex.input(fo.read())
 
 try:

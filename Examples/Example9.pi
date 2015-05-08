@@ -1,0 +1,6 @@
+defina t_error(t):
+    muestre "hola"
+    var = "cero"
+	mientras var < 10 # Compara var con un numero
+        mostrar "Iteracion numero: "
+        mostrar var

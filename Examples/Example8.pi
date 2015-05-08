@@ -1,0 +1,7 @@
+defina t_error(t):
+    muestre "hola"
+    muestre var + 2     #var no ha sido definido
+    var = 0
+	mientras var < 10
+        mostrar "Iteracion numero: "
+        mostrar var

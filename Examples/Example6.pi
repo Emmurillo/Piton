@@ -1,0 +1,6 @@
+defina t_error(t:   #Error de sintaxis
+    muestre "hola"
+    var = 5
+	muestre var
+    para w rango ident
+        mostrar "No hay error"
