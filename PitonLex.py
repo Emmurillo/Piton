@@ -2,7 +2,7 @@
 # PitonLex.py
 # Regex
 #
-# Parser
+# Scanner
 # Written by: Esteban & Emmanuel Murillo
 # ------------------------------------------------------------
 
