@@ -1,0 +1,5 @@
+defina t_error(t):
+    x = 5
+	muestre x
+    para w rango ident
+        mostrar "No hay error"
