@@ -7,6 +7,7 @@
 # ------------------------------------------------------------
 
 import ply.lex as lex
+import sys
 
 # Palabras reservadas
 reserved = {
@@ -30,7 +31,7 @@ reserved = {
    	'falso' : 'FALSO',
    	'and' : 'AND',
    	'or' : 'OR',
-    'muestre' : 'MUESTRE'
+    'mostrar' : 'MOSTRAR'
 }
 
 # Tokens
@@ -121,7 +122,7 @@ def t_COMMENT(t):
 	
 # Se lee uno de los programas	
 lex.lex()
-fo = open("ExamplePrograms/ExampleProgram2.pi", "r")		
+fo = open("Examples/Example1.pi", "r")		
 lex.input(fo.read())
 
 try:
@@ -129,4 +130,4 @@ try:
 		print repr(tok.type), ":", repr(tok.value)
 except TypeError as e:
 	print "Error en la linea", tok.lineno
-	print e
+	print e 
