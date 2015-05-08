@@ -30,11 +30,15 @@ reserved = {
    	'verdadero' : 'VERDADERO',
    	'falso' : 'FALSO',
    	'and' : 'AND',
-   	'or' : 'OR'
+   	'or' : 'OR',
+    'muestre' : 'MUESTRE'
 }
 
 # Tokens
-tokens = ['LPAREN', 'RPAREN', 'LBRACKET', 'RBRACKET', 'ASSIGNMENT', 'COMP', 'LESS', 'LESSEQ', 'GREATER', 'GREATEREQ', 'PLUS', 'MINUS', 'STAR', 'SLASH', 'PLUSEQ', 'MINUSEQ', 'STAREQ', 'SLASHEQ', 'COLON', 'COMMA', 'STRING', 'RESERVED', 'ID', 'INT'] + list(reserved.values())
+tokens = ['LPAREN', 'RPAREN', 'LBRACKET', 'RBRACKET', 'ASSIGNMENT', 'COMP', 
+        'LESS', 'LESSEQ', 'GREATER', 'GREATEREQ', 'PLUS', 'MINUS', 'STAR', 
+        'SLASH', 'PLUSEQ', 'MINUSEQ', 'STAREQ', 'SLASHEQ', 'COLON', 'COMMA', 
+        'STRING', 'RESERVED', 'ID', 'INT'] + list(reserved.values())
 	
 # Expresiones regulares de los tokens
 t_LPAREN		=		r'\('
