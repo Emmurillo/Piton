@@ -1,5 +1,6 @@
 defina t_error(t):
-    v'ar = 5
+    muestre "hola"
+    9var = 5s
 	muestre 9var
     para w rango ident
         mostrar "No hay error"
