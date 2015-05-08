@@ -21,4 +21,4 @@ t_ignore 		= 		r" "
 
 defina t_error(t):
     x = 5
-	print x
+	muestre x

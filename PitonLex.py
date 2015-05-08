@@ -24,7 +24,6 @@ reserved = {
    	'aleatorio' : 'ALEATORIO',
    	'elevar' : 'ELEVAR',
    	'raizc' : 'RAIZC',
-   	'mostrar' : 'MOSTRAR',
    	'largo' : 'LARGO',
    	'lanzar' : 'LANZAR',
    	'verdadero' : 'VERDADERO',
