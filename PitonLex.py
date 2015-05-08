@@ -100,7 +100,7 @@ t_AND			=		r'[and]'
 t_OR			=		r'[or]'
 
 # Para ignorar los espacios en blanco
-t_ignore 		= 		r' '
+t_ignore 		= 		' \t'
 
 def t_error(t):
 	t.lexer.skip(1)
@@ -118,7 +118,7 @@ def t_COMMENT(t):
 	
 # Se lee uno de los programas	
 lex.lex()
-fo = open("ExamplePrograms/ExampleProgram1.py", "r")		
+fo = open("ExamplePrograms/ExampleProgram2.pi", "r")		
 lex.input(fo.read())
 
 try:
