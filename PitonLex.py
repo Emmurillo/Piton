@@ -38,7 +38,7 @@ reserved = {
 tokens = ['LPAREN', 'RPAREN', 'LBRACKET', 'RBRACKET', 'ASSIGNMENT', 'COMP', 
         'LESS', 'LESSEQ', 'GREATER', 'GREATEREQ', 'PLUS', 'MINUS', 'STAR', 
         'SLASH', 'PLUSEQ', 'MINUSEQ', 'STAREQ', 'SLASHEQ', 'COLON', 'COMMA', 
-        'STRING', 'RESERVED', 'ID', 'INT'] + list(reserved.values())
+        'STRING', 'RESERVED', 'ERROR', 'ID', 'INT'] + list(reserved.values())
 	
 # Expresiones regulares de los tokens
 t_LPAREN		=		r'\('
@@ -63,6 +63,7 @@ t_COLON			= 		r'\:'
 t_COMMA			=		r'\,'
 t_STRING 		= 		r'\".*\"'
 
+
 # Revisar cada una de las palabras reservadas
 def t_RESERVED(t):
     r'[a-zA-Z][\w]*'
@@ -73,6 +74,10 @@ def t_RESERVED(t):
 def t_ID(t):
 	r'[a-zA-Z_][a-zA-Z_0-9]*' 
 	return t
+	
+def t_ERROR(t):
+	r'[0-9]+.*'
+	raise SyntaxError("Error en la linea %d" % t.lexer.lineno + "\nNombre no valido para una variable")
 
 # Expresion regular para los enteros
 def t_INT(t):
@@ -104,7 +109,7 @@ t_AND			=		r'[and]'
 t_OR			=		r'[or]'
 
 # Para ignorar los espacios en blanco
-t_ignore 		= 		' \t'
+t_ignore 		= 		' \t\n'
 
 def t_error(t):
 	t.lexer.skip(1)
@@ -131,3 +136,5 @@ try:
 except TypeError as e:
 	print "Error en la linea", tok.lineno
 	print e 
+except SyntaxError as e:
+	print e
