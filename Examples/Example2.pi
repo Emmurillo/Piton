@@ -1,24 +1,14 @@
-t_MIENTRAS = r"[mientras]"
-t_RETORNE		=		r"[retorne]"
-t_INTERRUPTOR	=		r"[interruptor]"
-t_CASO			=		r"[caso]"
-t_RANGO			=		r"[rango]"
-t_PARE			=		r"[pare]"
-t_ANEXAR		=		r"[anexar]"
-t_ALEATORIO		=		r"[aleatorio]"
-t_ELEVAR		=		r"[elevar]"
-t_RAIZC			=		r"[raizc]"
-t_MOSTRAR		=		r"[mostrar]"
-t_LARGO			=		r"[largo]"
-t_LANZAR		=		r"[lanzar]"
-t_VERDADERO		=		r"[Verdadero]"
-t_FALSO			=		r"[Falso]"
-t_AND			=		r"[and]"
-t_OR			=		r"[or]"
+defina media (lista):
+    suma = 0
+    cont = 0
+    para elem en lista:
+        cont += 1
+        suma += elem
+    media = suma/cont
+    retorne media
 
-# Para ignorar los espacios en blanco
-t_ignore 		= 		r" "
 
-defina t_error(t):
-    x = 5
-	muestre x
+# Sección del código principal 
+
+lista = [8,9,3,7,5,3]
+muestre "La media de la lista es " + media(lista)

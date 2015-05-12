@@ -1,12 +1,11 @@
-hola = "gdsg sdag"
-estonoesunerror
+defina cuenta (lista):
+    cont = 0
+    para elem en lista:
+        cont += 1
+    retorne cont
 
-fsdf
 
-sdf
+# Sección del código principal 
 
-:
-#comentario0294823kldsf'.';.';][;][;`
-
-mientras
-jhg
+lista = [1,2,3,6,2,1]
+muestre "La cantidad de elementos en la lista es " + cuenta(lista)

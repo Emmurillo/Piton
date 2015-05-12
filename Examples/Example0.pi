@@ -1,5 +1,17 @@
-sdfs
-sdfsdf
-sdf
-hola = 3
-jaja = "jaja"
+defina factorial (x):
+    si x == 0 :
+        retorne 1
+    resp = 1
+    cont = 1
+    mientras cont <= x:
+        resp *= cont
+        cont += 1
+    retorne resp
+
+
+# Sección del código principal 
+
+x = 5
+muestre "El factorial de " + x
+x = factorial(5)
+imprima " es " + x

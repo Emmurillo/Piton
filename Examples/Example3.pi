@@ -1,5 +1,13 @@
-defina t_error(t):
-    x = 5
-	muestre x
-    para w rango ident
-        mostrar "No hay error"
+defina rango (x, y):
+    if x >= y:
+        lanzar "Error, no se puede crear el rango"
+    mientras x < y:
+        imprima x
+        x += 1
+
+
+# Sección del código principal 
+
+x = 3
+y = 10
+muestre rango(x, y)
