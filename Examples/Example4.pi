@@ -1,6 +1,18 @@
-defina t_error(t):
-    muestre "hola"
-    9var = 5s
-	muestre 9var
-    para w rango ident
-        mostrar "No hay error"
+defina @factorial (x): 
+    si x == 0 :
+        retorne 1
+    resp = 1
+    cont = 1
+    mientras cont <= x:
+        resp *= cont
+        cont += 1
+    retorne resp
+
+
+# Sección del código principal 
+
+x = 5
+muestre "El factorial de " + x
+x = factorial(5)
+imprima " es " + x
+# ERROR: Línea 1 ‘@’No pertenece al alfabeto

@@ -1,6 +1,15 @@
-defina t_error(t):
-    muestre "hola"
-    vñar = 5
-	muestre vñar
-    para w rango ident
-        mostrar "No hay error"
+defina media (lista):
+    suma = 0
+    cont = 0
+    para elem en lista:
+        cont += 1~
+        suma += elem
+    media = suma/cont
+    retorne media
+
+
+# Sección del código principal 
+
+lista = [8,9,3,7,5,3]
+muestre "La media de la lista es " + media(lista)
+# ERROR: Línea 5 ‘~’ No pertenece al alfabeto
