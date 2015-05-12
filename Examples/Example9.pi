@@ -1,6 +1,12 @@
-defina t_error(t):
-    muestre "hola"
-    var = "cero"
-	mientras var < 10 # Compara var con un numero
-        mostrar "Iteracion numero: "
-        mostrar var
+defina cuenta (lista):
+    cont = 0
+    para elem en lista:
+        cont += 0	
+# ERROR: Nunca se le suma al contador
+    retorne cont
+
+
+# Sección del código principal 
+
+x = [1,2,3,6,2,1]
+muestre "La cantidad de elementos en la lista es " + cuenta(lista)

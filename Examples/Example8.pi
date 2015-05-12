@@ -1,7 +1,17 @@
-defina t_error(t):
-    muestre "hola"
-    muestre var + 2     #var no ha sido definido
-    var = 0
-	mientras var < 10
-        mostrar "Iteracion numero: "
-        mostrar var
+defina factorial (x):
+    si x == 0 :
+        retorne 1
+    resp = 1
+    cont = 1
+    mientras x <= x:        #ERROR: nunca sale del ciclo
+        resp *= cont
+        cont += 1
+    retorne resp
+
+
+# Sección del código principal 
+
+x = 5
+muestre "El factorial de " + x
+x = factorial(5)
+imprima " es " + x
