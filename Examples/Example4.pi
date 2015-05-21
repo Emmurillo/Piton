@@ -1,5 +1,5 @@
-defina @factorial (x): 
-    si x == 0 :
+defina factorial (x): 
+    si x@ == 0 :
         retorne 1
     resp = 1
     cont = 1
