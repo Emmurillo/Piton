@@ -2,11 +2,11 @@ defina factorial (x):
     si x@ == 0 :
         retorne 1
     resp = 1
-    cont = 1
+    co&nt = 1
     mientras cont <= x:
         resp *= cont
         cont += 1
-    retorne resp
+    ret%orne resp
 
 
 # Sección del código principal 

@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 #------------------------------------------------------------
 # PitonLex.py
 # Regex
@@ -6,8 +9,11 @@
 # Written by: Esteban & Emmanuel Murillo
 # ------------------------------------------------------------
 
+
 import ply.lex as lex
-import sys
+import sys, os
+
+errores = []
 
 # Palabras reservadas
 reserved = {
@@ -75,12 +81,8 @@ def t_RESERVED(t):
 
 # Expresion regular para los ID's
 def t_ID(t):
-	r'[a-zA-Z_][a-zA-Z_0-9]*' 
+	r'[a-zA-Z_$][a-zA-Z_0-9]*' 
 	return t
-	
-def t_ERROR(t):
-	r'[0-9]+.*'
-	raise SyntaxError("Error en la linea %d" % t.lexer.lineno + "\nNombre no valido para una variable")
 
 # Expresion regular para los enteros
 def t_INT(t):
@@ -116,7 +118,8 @@ t_ignore 		= 		' \t'
 
 def t_error(t):
 	t.lexer.skip(1)
-	raise TypeError("Caracter invalido '%s'" % t.value[0])
+	errores.append(t)
+#	raise TypeError("Caracter invalido '%s'" % t.value[0])
 	
 # Para llevar control del numero de linea que se lee, asi se indica en caso de error
 def t_newline(t):
@@ -130,18 +133,16 @@ def t_COMMENT(t):
 	
 # Se lee uno de los programas	
 lex.lex()
-<<<<<<< HEAD
-fo = open("Examples/Example1.pi", "r")		
-=======
-fo = open("Examples/Example4.pi", "r")		
->>>>>>> b057794be6ebeadeed0f95bf62d2f2c1a8e2bf6c
+
+fo = open("Examples/Example4.pi", "r")
+
 lex.input(fo.read())
 
-try:
-	for tok in iter(lex.token, None):
-		print repr(tok.type), ":", repr(tok.value)
-except TypeError as e:
-	print "Error en la linea", tok.lineno
-	print e 
-except SyntaxError as e:
-	print e
+for tok in iter(lex.token, None):
+	print repr(tok.type), ":", repr(tok.value)
+	
+largo = len(errores)
+print "Cantidad de errres lexicos:", largo
+for i in range (largo):
+	print "Caracter invalido:", errores[i].value[0], "en la linea:", errores[i].lineno
+			
