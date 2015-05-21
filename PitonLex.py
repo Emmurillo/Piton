@@ -35,16 +35,19 @@ reserved = {
 }
 
 # Tokens
-tokens = ['LPAREN', 'RPAREN', 'LBRACKET', 'RBRACKET', 'ASSIGNMENT', 'COMP', 
-        'LESS', 'LESSEQ', 'GREATER', 'GREATEREQ', 'PLUS', 'MINUS', 'STAR', 
-        'SLASH', 'PLUSEQ', 'MINUSEQ', 'STAREQ', 'SLASHEQ', 'COLON', 'COMMA', 
-        'STRING', 'RESERVED', 'ERROR', 'ID', 'INT'] + list(reserved.values())
+tokens = ['LPAREN', 'RPAREN', 'LBRACKET', 'RBRACKET', 'LBRACE', 'RBRACE',
+		'ASSIGNMENT', 'COMP', 'LESS', 'LESSEQ', 'GREATER', 'GREATEREQ', 'PLUS',
+		'MINUS', 'STAR', 'SLASH', 'PLUSEQ', 'MINUSEQ', 'STAREQ', 'SLASHEQ',
+		'COLON', 'COMMA', 'STRING', 'RESERVED', 'ERROR', 'ID',
+		'INT'] + list(reserved.values())
 	
 # Expresiones regulares de los tokens
 t_LPAREN		=		r'\('
 t_RPAREN		=		r'\)'
 t_LBRACKET		=		r'\['
 t_RBRACKET		=		r'\]'
+t_LBRACE		=		r'\{'
+t_RBRACE		=		r'\}'
 t_ASSIGNMENT 	= 		r'\='
 t_COMP			= 		r'\=='
 t_LESS			=		r'\<'
@@ -109,7 +112,7 @@ t_AND			=		r'[and]'
 t_OR			=		r'[or]'
 
 # Para ignorar los espacios en blanco
-t_ignore 		= 		' \t\n'
+t_ignore 		= 		' \t'
 
 def t_error(t):
 	t.lexer.skip(1)
@@ -127,7 +130,7 @@ def t_COMMENT(t):
 	
 # Se lee uno de los programas	
 lex.lex()
-fo = open("Examples/Example5.pi", "r")		
+fo = open("Examples/Example1.pi", "r")		
 lex.input(fo.read())
 
 try:
