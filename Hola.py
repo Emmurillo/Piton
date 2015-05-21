@@ -132,15 +132,38 @@ def t_COMMENT(t):
 # Se lee uno de los programas	
 lex.lex()
 
-fo = open("Examples/Example4.pi", "r")
+#------------------------------------------------------------
+# PitonYacc.py
+# Grammar rules for Piton programming language
+#
+# Parser
+# Written by: Esteban & Emmanuel Murillo
+# ------------------------------------------------------------
 
-lex.input(fo.read())
+import ply.yacc as yacc
 
-for tok in iter(lex.token, None):
-	print repr(tok.type), ":", repr(tok.value)
+# Parsing rules
+#precedence = (('left','ADDOP'), ('right','UMINUS'))
+
+# Para almacenar los nombres de variables
+# Sirve para ver si una variable ya fue definida
+names = {}
+
+# Falta declarar todas las reglas gramaticales
+
+def p_program_func(p):
+	'program : ID ASSIGNMENT INT SEMICOLON'
+	p[0] = p[1]
 	
-largo = len(errores)
-print "Cantidad de errres lexicos:", largo
-for i in range (largo):
-	print "Caracter invalido:", errores[i].value[0], "en la linea:", errores[i].lineno
-			
+def p_error(t):
+    print("Syntax error at '%s'" % t.value)
+
+import ply.yacc as yacc
+parser = yacc.yacc()
+
+while True:
+    try:
+        s = input('calc > ')   # Use raw_input on Python 2
+    except EOFError:
+        break
+    parser.parse(s)

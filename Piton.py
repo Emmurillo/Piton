@@ -22,9 +22,10 @@ class Piton(cmd.Cmd):
  
     def default(self, line):
         try:
+        	print line
 	       	s = yacc.parse(line)
     		yacc.parse(s)
-    	except:
+    	except EOFError:
     		print('')
  
 if __name__ == '__main__':

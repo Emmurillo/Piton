@@ -19,15 +19,17 @@ names = {}
 # Falta declarar todas las reglas gramaticales
 
 def p_program_func(p):
-	'program : def_func'
+	'program : ID ASSIGNMENT INT SEMICOLON'
 	p[0] = p[1]
+
+'''
 	
 def p_program_sent(p):
 	'program : lista_sentencias'
 	p[0] = p[1]
 	
 def p_def_func(p):
-	'def_func : DEFINA nombre LPAREN lista_parametros RPAREN COLON lista_sentencias'
+	'def_func : DEFINA nombre LPAREN lista_parametros RPAREN COLON lista_sentencias SEMICOLON'
 	p[0] = p[1]
 	
 def p_nombre(p):
@@ -43,7 +45,11 @@ def p_lista_parametros_comma(p):
 	p[0] = [p[2]] + p[3]
 	
 def p_lista_parametros_vacia(p):
-	'lista_parametros : '
+	'lista_parametros : empty'
+	p[0] = []
+	
+def p_empty(p):
+	'empty :'
 	pass
 	
 def p_parametro(p):
@@ -55,26 +61,28 @@ def p_lista_sentencias_sentencia(p):
 	p[0] = [p[1]] + p[2]
 	
 def p_lista_sentencias_vacia(p):
-	'lista_sentencias : '
-	pass
+	'lista_sentencias : empty'
+	p[0] = []
 	
 def p_sentencia_asignacion(p):
-	'sentencia : asignacion'
+	'sentencia : asignacion NEWLINE'
 	p[0] = p[1]
 	
+
 def p_sentencia_condicional(p):
-	'sentencia : condicional'
+	'sentencia : condicional NEWLINE'
 	p[0] = p[1]
 	
 def p_sentencia_bucle(p):
-	'sentencia : bucle'
+	'sentencia : bucle NEWLINE'
 	p[0] = p[1]
+	sdf% := 'das'
 	
-'''	
+
 def p_sentencia_reservada(p):
 	'sentencia : RESERVED'
 	p[0] = p[1]
-'''
+
 
 def p_sentencia_retorne(p):
 	'sentencia : RETORNE'
@@ -84,22 +92,22 @@ def p_asignacion_dato(p):
 	'asignacion : ID ASSIGNMENT dato'
 	names[p[1]] = p[3]
 	
-'''	
+
 def p_asignacion_lista_operaciones(p):
 	'asignacion : lista_operaciones'
 	names[p[1]] = p[3]
 	
 def p_lista_operaciones(p):
 	'lista_operaciones : 
-'''
 
 def p_dato(p):
-	'''dato : INT
-			| TRUE
-			| FALSE
-			| STRING '''
+	dato : INT
+			| VERDADERO
+			| ID
+			| FALSO
+			| STRING 
 
-
+'''
 	
 def p_error(p):
     if p:
