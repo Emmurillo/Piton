@@ -112,7 +112,5 @@ def p_dato(p):
 def p_error(p):
     if p:
         print("Error de sintaxis @ '%s'" % p.value)
-    else:
-        print("Error de sintaxis @ EOF")
 	
 yacc.yacc()
