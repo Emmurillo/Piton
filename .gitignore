@@ -57,10 +57,11 @@ docs/_build/
 # PyBuilder
 target/
 
-
 .gitignore~
 *.pyc
 *.pyo
 *.out
 *tab.py
 *.swp
+*.idea
+

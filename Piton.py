@@ -3,31 +3,17 @@
 # Written by: Esteban & Emmanuel Murillo
 # ------------------------------------------------------------
 
-import ply.yacc as yacc
-import cmd
+import sys
 from PitonYacc import yacc
- 
-class Piton(cmd.Cmd):
 
-    def __init__(self):
-        cmd.Cmd.__init__(self)
-        self.prompt = "--> "
-        self.intro  = "Piton 1.0"
- 
-    def do_exit(self, args):
-        return -1
- 
-    def emptyline(self):
-        pass
- 
-    def default(self, line):
-        try:
-        	print line
-	       	s = yacc.parse(line)
-    		yacc.parse(s)
-    	except EOFError:
-    		print('')
- 
-if __name__ == '__main__':
-	p = Piton()
-	p.cmdloop()
+if sys.version_info[0] >= 3:
+    raw_input = input
+
+while True:
+    try:
+        s = raw_input('Piton > ')
+    except EOFError:
+        break
+    if not s:
+        continue
+    yacc.parse(s)

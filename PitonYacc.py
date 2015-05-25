@@ -19,7 +19,7 @@ names = {}
 # Falta declarar todas las reglas gramaticales
 
 def p_program_func(p):
-	'program : ID ASSIGNMENT INT '
+	'program : ID ASSIGNMENT INT SEMICOLON'
 	p[0] = p[1]
 
 '''
@@ -112,5 +112,8 @@ def p_dato(p):
 def p_error(p):
     if p:
         print("Error de sintaxis @ '%s'" % p.value)
+    else:
+        print("Error de sintaxis")
+
 	
 yacc.yacc()
