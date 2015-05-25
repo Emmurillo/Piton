@@ -57,9 +57,9 @@ t_LESSEQ		=		r'\<='
 t_GREATER		=		r'\>'
 t_GREATEREQ		=		r'\>='
 t_PLUS			= 		r'\+'
-t_MINUS			= 		r'\-'
+t_MINUS			= 		r'-'
 t_STAR			=		r'\*'
-t_SLASH			=		r'\/'
+t_SLASH			=		r'/'
 t_PLUSEQ		= 		r'\+='
 t_MINUSEQ		= 		r'\-='
 t_STAREQ		=		r'\*='
@@ -131,7 +131,7 @@ def t_COMMENT(t):
 	
 # Se lee uno de los programas	
 lex.lex()
-
+"""
 fo = open("Examples/Example4.pi", "r")
 
 lex.input(fo.read())
@@ -143,4 +143,5 @@ largo = len(errores)
 print "Cantidad de errres lexicos:", largo
 for i in range (largo):
 	print "Caracter invalido:", errores[i].value[0], "en la linea:", errores[i].lineno
+"""
 			
