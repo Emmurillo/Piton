@@ -29,15 +29,18 @@ def p_program_sent(p):
 
 def p_definicion_func(p):
 	'definicion : DEFINA ID LPAREN params RPAREN COLON'
-	p[0] = p[1]
 
 # Parametros
+def p_params_id(p):
+	"""params : params_lista
+                | empty"""
 
-def p_params_empty(p):
-	'params : empty'
+def p_params_lista(p):
+	"""params_lista : ID
+                | params_lista COMMA ID"""
 
-def p_params_ids(p):
-	'params : ID'
+
+
 
 # Hilera vacia
 
