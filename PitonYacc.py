@@ -16,11 +16,35 @@ from PitonLex import tokens
 # Sirve para ver si una variable ya fue definida
 names = {}
 
-# Falta declarar todas las reglas gramaticales
+# Inicio de la definicion de la gramatica  
 
-def p_program_func(p):
-	'program : ID ASSIGNMENT INT SEMICOLON'
+def p_program_def(p):
+	'program : definicion'
+
+def p_program_sent(p):
+	'program : INT'
+
+
+# Definicion basica de las funciones
+
+def p_definicion_func(p):
+	'definicion : DEFINA ID LPAREN params RPAREN COLON'
 	p[0] = p[1]
+
+# Parametros
+
+def p_params_empty(p):
+	'params : empty'
+
+def p_params_ids(p):
+	'params : ID'
+
+# Hilera vacia
+
+def p_empty(p):
+	'empty :'
+	pass
+
 
 '''
 	
@@ -48,9 +72,7 @@ def p_lista_parametros_vacia(p):
 	'lista_parametros : empty'
 	p[0] = []
 	
-def p_empty(p):
-	'empty :'
-	pass
+
 	
 def p_parametro(p):
 	'parametro : ID'
@@ -111,9 +133,11 @@ def p_dato(p):
 	
 def p_error(p):
     if p:
-        print("Error de sintaxis @ '%s'" % p.value)
+        print("Error de sintaxis '%s'" % p.value)
     else:
         print("Error de sintaxis")
 
 	
 yacc.yacc()
+
+
