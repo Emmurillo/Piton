@@ -132,17 +132,3 @@ def t_COMMENT(t):
 
 # Se lee uno de los programas	
 lex.lex()
-"""
-fo = open("Examples/Example4.pi", "r")
-
-lex.input(fo.read())
-
-for tok in iter(lex.token, None):
-    print repr(tok.type), ":", repr(tok.value)
-
-largo = len(errores)
-print "Cantidad de errres lexicos:", largo
-for i in range (largo):
-    print "Caracter invalido:", errores[i].value[0], "en la linea:", errores[i].lineno
-"""
-
