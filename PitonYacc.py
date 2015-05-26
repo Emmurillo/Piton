@@ -16,6 +16,10 @@ from PitonLex import tokens
 # Sirve para ver si una variable ya fue definida
 names = {}
 
+# Lista de errores
+
+errores_yacc = []
+
 # Inicio de la definicion de la gramatica  
 
 # Definicion de funciones
@@ -51,10 +55,16 @@ def p_lista_sentencias(p):          # CAMBIAR POR NEWLINE
                 | empty"""
 
 def p_sentencia(p):          # CAMBIAR POR NEWLINE
-	"""sentencia : asignacion"""
+	"""sentencia : asignacion
+                    | condicional"""
 
 def p_asignacion_dato(p):
 	'asignacion : ID ASSIGNMENT dato'
+
+# Condicional
+
+def p_condicional_si(p):
+    'condicional : SI dato COLON sentencias'
 
 
 # Tipos de datos
@@ -137,24 +147,11 @@ def p_sentencia_retorne(p):
 	'sentencia : RETORNE'
 	p[0] = p[1]
 	
-def p_asignacion_dato(p):
-	'asignacion : ID ASSIGNMENT dato'
-	names[p[1]] = p[3]
-	
 
 def p_asignacion_lista_operaciones(p):
 	'asignacion : lista_operaciones'
 	names[p[1]] = p[3]
 	
-def p_lista_operaciones(p):
-	'lista_operaciones : 
-
-def p_dato(p):
-	dato : INT
-			| VERDADERO
-			| ID
-			| FALSO
-			| STRING 
 
 '''
 	
@@ -162,7 +159,7 @@ def p_error(p):
     if p:
         print("Error de sintaxis '%s'" % p.value)
     else:
-        print("Error de sintaxis")
+        print("Error de sintaxis" )
 
 	
 yacc.yacc()

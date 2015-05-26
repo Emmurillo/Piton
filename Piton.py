@@ -6,7 +6,7 @@
 from PitonYacc import yacc
 
 try:
-    fo = open("Examples/Example4.pi", "r")
+    fo = open("Examples/grammar.pi", "r")
     s = fo.read()
 except EOFError as e:
     print e
@@ -15,7 +15,7 @@ yacc.parse(s)
 
 # Para leer tokens y detectar errores lexicos
 """
-fo = open("Examples/Example4.pi", "r")
+fo = open("Examples/.pi", "r")
 
 lex.input(fo.read())
 
