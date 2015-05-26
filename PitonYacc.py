@@ -18,28 +18,52 @@ names = {}
 
 # Inicio de la definicion de la gramatica  
 
+# Definicion de funciones
 def p_program_def(p):
-	'program : definicion'
-
-def p_program_sent(p):
-	'program : INT'
+	"""program : definicion
+                 | sentencias"""
 
 
 # Definicion basica de las funciones
 
 def p_definicion_func(p):
-	'definicion : DEFINA ID LPAREN params RPAREN COLON'
+	'definicion : DEFINA ID LPAREN params RPAREN COLON sentencias SEMICOLON'
 
 # Parametros
-def p_params_id(p):
-	"""params : params_lista
+def p_params(p):
+	"""params : lista_params
                 | empty"""
 
-def p_params_lista(p):
-	"""params_lista : ID
-                | params_lista COMMA ID"""
+def p_lista_params(p):
+	"""lista_params : ID
+                | lista_params COMMA ID"""
 
 
+# Definicion de las sentencias
+
+
+def p_sentencias(p):          # CAMBIAR POR NEWLINE
+	"""sentencias : sentencia SEMICOLON
+                | lista_sentencias"""
+
+def p_lista_sentencias(p):          # CAMBIAR POR NEWLINE
+	"""lista_sentencias : sentencia SEMICOLON lista_sentencias
+                | empty"""
+
+def p_sentencia(p):          # CAMBIAR POR NEWLINE
+	"""sentencia : asignacion"""
+
+def p_asignacion_dato(p):
+	'asignacion : ID ASSIGNMENT dato'
+
+
+# Tipos de datos
+def p_dato(p):
+	"""dato : INT
+			| VERDADERO
+			| ID
+			| FALSO
+			| STRING"""
 
 
 # Hilera vacia
