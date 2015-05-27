@@ -33,7 +33,7 @@ reserved = {
     'y': 'Y',
     'o': 'O',
     'en': 'EN',
-    'mostrar': 'MOSTRAR'
+    'imprimir': 'IMPRIMIR'
 }
 
 # Tokens
@@ -102,7 +102,7 @@ t_ANEXAR = r'[anexar]'
 t_ALEATORIO = r'[aleatorio]'
 t_ELEVAR = r'[elevar]'
 t_RAIZC = r'[raizc]'
-t_MOSTRAR = r'[mostrar]'
+t_IMPRIMIR = r'[imprimir]'
 t_LARGO = r'[largo]'
 t_LANZAR = r'[lanzar]'
 t_VERDADERO = r'[Verdadero]'
@@ -128,4 +128,4 @@ def t_COMMENT(t):
     pass
 
 # Se lee uno de los programas	
-lex.lex()
+lexer = lex.lex()

@@ -12,5 +12,5 @@ defina media (lista):
 
 # Sección del código principal 
 
-lista = [8,9,3,7,5,3];
-muestre "La media de la lista es " + media(lista);
+#lista = [8,9,3,7,5,3];
+imprimir "La media de la lista es " + media(lista);

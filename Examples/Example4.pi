@@ -1,11 +1,13 @@
 defina factorial (x): 
     si @x == 0 :
         retorne 1;
+    ;
     resp = 1;
     cont = 1;
     mientras cont <= x:
         resp *= cont;
         cont += 1;
+    ;
     retorne resp;
 ;
 
@@ -13,7 +15,7 @@ defina factorial (x):
 # Sección del código principal
 
 x = 5;
-muestre "El factorial de " + x;
+imprimir "El factorial de " + x;
 x = factorial(5);
-imprima " es " + x;
+imprimir " es " + x;
 # ERROR: Línea 1 ‘@’No pertenece al alfabeto

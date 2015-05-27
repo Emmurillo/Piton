@@ -1,17 +1,15 @@
-defina rango (x, y):
-    if x >= y:
+defina hola(x, u):
+    si x >= u:
         lanzar "Error, no se puede crear el rango";
     ;
-    mientras x < y:
-        imprima x;
+    mientras x < u:
+        imprimir x;
         x += 1;
     ;
 ;
 
-# Sección del código principal 
-
-x = 3;
-y = 10;
-muestre rango(x, y);
-pare;
-# ERROR: Línea 13 ‘pare’ inesperado, fuera de ciclo o selección
+# Sección del código principal
+# 'y' es una palabra reservada, por lo tanto no se puede usar como nombre de variable
+x = 3
+nofes = 10
+imprimir hola(x, x);

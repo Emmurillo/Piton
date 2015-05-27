@@ -1,16 +1,14 @@
-defina rango (x, y):
-    if x >= y:
+defina hola (x, u):
+    si x >= u:
         lanzar "Error, no se puede crear el rango";
     ;
-    mientras x < y:
-        imprima x;
+    mientras x < u:
+        imprimir x;
         x += 1;
     ;
 ;
 
-
 # Sección del código principal 
-
 x = 3;
-y = 10;
-muestre rango(x, y);
+u = 10;
+imprimir hola(x, u);

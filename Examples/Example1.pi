@@ -9,5 +9,4 @@ defina cuenta (lista):
 
 # Sección del código principal 
 
-lista = [1,2,3,6,2,1];
-muestre "La cantidad de elementos en la lista es " + cuenta(lista);
+imprimir "La cantidad de elementos en la lista es " + cuenta(lista);

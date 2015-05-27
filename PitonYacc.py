@@ -7,11 +7,10 @@
 # ------------------------------------------------------------
 
 import ply.yacc as yacc
-from PitonLex import tokens
+from PitonLex import tokens, lexer
 
 # Parsing rules
 #precedence = (('left','ADDOP'), ('right','UMINUS'))
-literals = "\n"
 
 # Para almacenar los nombres de variables
 # Sirve para ver si una variable ya fue definida
@@ -21,7 +20,7 @@ names = {}
 
 errores_yacc = []
 
-# Inicio de la definicion de la gramatica  
+# Inicio de la definicion de la gramatica
 
 # Definicion de funciones
 def p_program_def(p):
@@ -35,6 +34,9 @@ def p_definicion_func(p):
 
 def p_funcion(p):
 	"""funcion : ID LPAREN params RPAREN"""
+
+def p_lista(p):
+	"""lista : LBRACKET params RBRACKET"""
 
 # Parametros
 def p_params(p):
@@ -63,7 +65,13 @@ def p_sentencia(p):
                 	| PARE SEMICOLON
                 	| operacion SEMICOLON
                 	| RETORNE booleano SEMICOLON
-                	| RETORNE dato SEMICOLON"""
+                	| RETORNE dato SEMICOLON
+                	| IMPRIMIR STRING SEMICOLON
+                	| IMPRIMIR dato SEMICOLON
+                	| IMPRIMIR STRING PLUS dato SEMICOLON
+                	| IMPRIMIR STRING PLUS funcion SEMICOLON
+                	| IMPRIMIR funcion SEMICOLON
+                	| LANZAR STRING SEMICOLON"""
 
 #Quedan pendientes arreglos para el bucle para
 def p_bucle(p):
@@ -111,6 +119,7 @@ def p_asignacion_dato(p):
 	"""asignacion 	: ID ASSIGNMENT dato
 					| ID ASSIGNMENT STRING
 					| ID ASSIGNMENT funcion
+					| ID ASSIGNMENT lista
 					| ID PLUSEQ dato
 					| ID MINUSEQ dato
 					| ID STAREQ dato
@@ -146,11 +155,17 @@ def p_empty(p):
 
 def p_error(p):
     if p:
-        print("Error de sintaxis '%s'" % p.value)
+		errores_yacc.append(p)
+		print "Error de sintaxis '%s'" % p.value, "en la linea:", p.lineno - file_len("Examples/Example6.pi")
     else:
-        print("Error de sintaxis")
+		errores_yacc.append("Sintaxis no valida")
+		print("Error de sintaxis")
 
-	
+def file_len(fname):
+    with open(fname) as f:
+        for i, l in enumerate(f):
+            pass
+    return i + 1
+
 yacc.yacc()
-
 

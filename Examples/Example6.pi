@@ -1,4 +1,4 @@
-defina cuenta (lista)
+defina cuenta (lista):
     cont = 0;
     para elem en lista:
         cont += 1;
@@ -9,6 +9,6 @@ defina cuenta (lista)
 
 # Sección del código principal 
 
-x = [1,2,3,6,2,1];
-muestre "La cantidad de elementos en la lista es "+contar(lista)
+x = [1,2,3,6,2,1;
+imprimir "La cantidad de elementos en la lista es " + contar(lista);
 # ERROR: Línea 1 Se esperaba : se obtuvo ‘cont’
