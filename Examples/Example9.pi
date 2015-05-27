@@ -1,12 +1,14 @@
 defina cuenta (lista):
-    cont = 0
+    cont = 0;
     para elem en lista:
-        cont += 0	
+        cont += 0;
+    ;	
 # ERROR: Nunca se le suma al contador
-    retorne cont
+    retorne cont;
+;
 
 
 # Sección del código principal 
 
-x = [1,2,3,6,2,1]
-muestre "La cantidad de elementos en la lista es " + cuenta(lista)
+x = [1,2,3,6,2,1];
+muestre "La cantidad de elementos en la lista es " + cuenta(lista);

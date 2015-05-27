@@ -1,12 +1,14 @@
 defina cuenta (lista)
-    cont = 0
+    cont = 0;
     para elem en lista:
-        cont += 1
-    retorne cont
+        cont += 1;
+    ;
+    retorne cont;
+;
 
 
 # Sección del código principal 
 
-x = [1,2,3,6,2,1]
+x = [1,2,3,6,2,1];
 muestre "La cantidad de elementos en la lista es "+contar(lista)
 # ERROR: Línea 1 Se esperaba : se obtuvo ‘cont’

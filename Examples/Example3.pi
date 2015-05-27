@@ -1,13 +1,16 @@
 defina rango (x, y):
     if x >= y:
-        lanzar "Error, no se puede crear el rango"
+        lanzar "Error, no se puede crear el rango";
+    ;
     mientras x < y:
-        imprima x
-        x += 1
+        imprima x;
+        x += 1;
+    ;
+;
 
 
 # Sección del código principal 
 
-x = 3
-y = 10
-muestre rango(x, y)
+x = 3;
+y = 10;
+muestre rango(x, y);
