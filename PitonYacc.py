@@ -117,17 +117,17 @@ def p_asignacion_dato(p):
 
 def p_condicional_si(p):
 	"""condicional 	: SI dato COLON sentencias
-					| SI dato COMP dato COLON sentencias
-					| SI dato COMP operacion COLON sentencias
-					| SI operacion COMP dato COLON sentencias
-					| SI operacion COMP operacion COLON sentencias
-					| SI booleano compBoolean booleano
-					| SI dato COLON sentencias SEMICOLON SINO COLON sentencias
-					| SI dato COMP dato COLON sentencias SEMICOLON SINO COLON sentencias
-					| SI dato COMP operacion COLON sentencias SEMICOLON SINO COLON sentencias
-					| SI operacion COMP dato COLON sentencias SEMICOLON SINO COLON sentencias
-					| SI operacion COMP operacion COLON sentencias SEMICOLON SINO COLON sentencias
-					| SI booleano compBoolean booleano SEMICOLON SINO COLON sentencias"""
+					| SI dato comp dato COLON sentencias
+					| SI dato comp operacion COLON sentencias
+					| SI operacion comp dato COLON sentencias
+					| SI operacion comp operacion COLON sentencias
+					| SI booleano compBoolean booleano COLON sentencias
+					| SI dato COLON sentencias SINO COLON sentencias
+					| SI dato comp dato COLON sentencias SINO COLON sentencias
+					| SI dato comp operacion COLON sentencias SINO COLON sentencias
+					| SI operacion comp dato COLON sentencias SINO COLON sentencias
+					| SI operacion comp operacion COLON sentencias SINO COLON sentencias
+					| SI booleano compBoolean booleano SINO COLON sentencias"""
 
 # Tipos de datos
 def p_dato(p):
