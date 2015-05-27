@@ -26,11 +26,15 @@ errores_yacc = []
 # Definicion de funciones
 def p_program_def(p):
 	"""program 	: definicion
-            	| sentencias"""
+            	| sentencias
+            	| definicion sentencias"""
 
 # Definicion basica de las funciones
 def p_definicion_func(p):
 	'definicion : DEFINA ID LPAREN params RPAREN COLON sentencias SEMICOLON'
+
+def p_funcion(p):
+	"""funcion : ID LPAREN params RPAREN"""
 
 # Parametros
 def p_params(p):
@@ -38,8 +42,8 @@ def p_params(p):
                 | empty"""
 
 def p_lista_params(p):
-	"""lista_params : ID
-                	| lista_params COMMA ID"""
+	"""lista_params : dato
+                	| lista_params COMMA dato"""
 
 # Definicion de las sentencias
 def p_sentencias(p):
@@ -53,6 +57,7 @@ def p_lista_sentencias(p):
  # CAMBIAR POR NEWLINE
 def p_sentencia(p):
 	"""sentencia 	: asignacion SEMICOLON
+					| funcion SEMICOLON
                 	| condicional SEMICOLON
                 	| bucle SEMICOLON
                 	| PARE SEMICOLON
@@ -105,6 +110,7 @@ def p_operador(p):
 def p_asignacion_dato(p):
 	"""asignacion 	: ID ASSIGNMENT dato
 					| ID ASSIGNMENT STRING
+					| ID ASSIGNMENT funcion
 					| ID PLUSEQ dato
 					| ID MINUSEQ dato
 					| ID STAREQ dato

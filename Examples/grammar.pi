@@ -11,10 +11,6 @@ defina factorial (x):
     retorne resp;
 ;
 
-
 # Sección del código principal
-
 x = 5;
-muestre "El factorial de " + x;
-x = factorial(5);
-muestre " es " + x;
+x = factorial(x);
