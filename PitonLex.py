@@ -30,8 +30,9 @@ reserved = {
     'lanzar': 'LANZAR',
     'verdadero': 'VERDADERO',
     'falso': 'FALSO',
-    'and': 'AND',
-    'or': 'OR',
+    'y': 'Y',
+    'o': 'O',
+    'en': 'EN',
     'mostrar': 'MOSTRAR'
 }
 
@@ -69,19 +70,16 @@ t_COMMA = r'\,'
 t_STRING = r'\".*\"'
 t_NEWLINE = r'\\n'
 
-
 # Revisar cada una de las palabras reservadas
 def t_RESERVED(t):
     r'[a-zA-Z][\w]*'
     t.type = reserved.get(t.value, 'ID')
     return t
 
-
 # Expresion regular para los ID's
 def t_ID(t):
     r'[a-zA-Z_$][a-zA-Z_0-9]*'
     return t
-
 
 # Expresion regular para los enteros
 def t_INT(t):
@@ -109,12 +107,11 @@ t_LARGO = r'[largo]'
 t_LANZAR = r'[lanzar]'
 t_VERDADERO = r'[Verdadero]'
 t_FALSO = r'[Falso]'
-t_AND = r'[and]'
-t_OR = r'[or]'
+t_Y = r'[y]'
+t_O = r'[o]'
 
 # Para ignorar los espacios en blanco
 t_ignore = ' \t'
-
 
 def t_error(t):
     t.lexer.skip(1)

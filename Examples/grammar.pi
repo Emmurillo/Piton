@@ -1,10 +1,14 @@
-defina fe():
-    dekjf = 7;
-    shgdf = 388;
-    si Verdadero:
-        sd = 23;
-        si Falso:
-            sdh =12;
+defina cuenta(lista):
+    cont = 0;
+    a = "fd";
+    mientras cont <= 0:
+        si cont == 0:
+            hola = "hola";
         ;
+        sino:
+            hola = "adios";
+        ;
+        cont += 0;
     ;
+    retorne cont;
 ;

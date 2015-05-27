@@ -1,15 +1,15 @@
 defina factorial (x): 
-    si x@ == 0 :
+    si x == 0 :
         retorne 1
     resp = 1
-    co&nt = 1
+    cont = 1
     mientras cont <= x:
         resp *= cont
         cont += 1
-    ret%orne resp
+    retorne resp
 
 
-# Sección del código principal 
+# Sección del código principal
 
 x = 5
 muestre "El factorial de " + x
