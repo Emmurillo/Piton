@@ -1,14 +1,16 @@
 defina media (lista):
-    suma = 0
-    cont = 0
+    suma = 0;
+    cont = 0;
     para elem en lista:
-        cont += 1
-        suma += elem
-    media = suma/cont
-    retorne media
+        cont += 1;
+        suma += elem;
+    ;
+    media = suma/cont;
+    retorne media;
+;
 
 
 # Sección del código principal 
 
-lista = [8,9,3,7,5,3]
-muestre "La media de la lista es " + media(lista)
+lista = [8,9,3,7,5,3];
+muestre "La media de la lista es " + media(lista);
