@@ -1,15 +1,16 @@
-defina hola(x, u):
+defina hola(xuy, u):
     si x >= u:
         lanzar "Error, no se puede crear el rango";
     ;
     mientras x < u:
-        imprimir x;
+        imprimir 7;
         x += 1;
     ;
 ;
 
 # Sección del código principal
 # 'y' es una palabra reservada, por lo tanto no se puede usar como nombre de variable
-x = 3;
-nofes = 10;
+v = 3;
+fu = 10;
 imprimir hola(x, x);
+imprimir "ok";

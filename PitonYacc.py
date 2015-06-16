@@ -19,6 +19,7 @@ names = {}
 # Lista de errores
 
 errores_yacc = []
+ultimo_token = ""
 
 # Inicio de la definicion de la gramatica
 
@@ -116,7 +117,7 @@ def p_operador(p):
 				| SLASH"""
 
 def p_asignacion_dato(p):
-	"""asignacion 	: ID ASSIGNMENT dato
+    """asignacion 	: ID ASSIGNMENT dato
 					| ID ASSIGNMENT STRING
 					| ID ASSIGNMENT funcion
 					| ID ASSIGNMENT lista
@@ -129,6 +130,7 @@ def p_asignacion_dato(p):
 					| ID MINUSEQ operacion
 					| ID STAREQ operacion
 					| ID SLASHEQ operacion"""
+
 
 def p_condicional_si(p):
 	"""condicional 	: SI dato COLON sentencias
@@ -144,10 +146,14 @@ def p_condicional_si(p):
 					| SI operacion comp operacion COLON sentencias SINO COLON sentencias
 					| SI booleano compBoolean booleano SINO COLON sentencias"""
 
+
 # Tipos de datos
 def p_dato(p):
-	"""dato : INT
+    """dato : INT
 			| ID"""
+    ultimo_token = p[-1]
+
+
 
 def p_empty(p):
 	"""empty : """
@@ -156,10 +162,10 @@ def p_empty(p):
 def p_error(p):
     if p:
 		errores_yacc.append(p)
-		print "Error de sintaxis '%s'" % p.value, "en la linea:", p.lineno - file_len("Examples/Example6.pi")
+		print "Error de sintaxis '%s'" % p.value, "en la linea:", p.lineno,"se esperaba", p.type
     else:
-		errores_yacc.append("Sintaxis no valida")
-		print("Error de sintaxis")
+        errores_yacc.append("Sintaxis no valida")
+        print "Error de sintaxis"
 
 def file_len(fname):
     with open(fname) as f:
@@ -167,5 +173,5 @@ def file_len(fname):
             pass
     return i + 1
 
-yacc.yacc()
+parser = yacc.yacc()
 
