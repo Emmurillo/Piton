@@ -13,7 +13,7 @@ try:
     lex.input(s)
 
     for tok in iter(lex.token, None):
-        #print repr(tok.type), ":", repr(tok.value)
+        # print repr(tok.type), ":", repr(tok.value)
         continue
 
     largo = len(errores)

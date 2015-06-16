@@ -10,6 +10,6 @@ defina hola(x, u):
 
 # Sección del código principal
 # 'y' es una palabra reservada, por lo tanto no se puede usar como nombre de variable
-x = 3
-nofes = 10
+x = 3;
+nofes = 10;
 imprimir hola(x, x);
