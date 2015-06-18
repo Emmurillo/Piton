@@ -11,6 +11,6 @@ defina hola(xuy, u):
 # Sección del código principal
 # 'y' es una palabra reservada, por lo tanto no se puede usar como nombre de variable
 v = 3;
-fu = 10;
+fñu = 10;
 imprimir hola(x, x);
 imprimir "ok";

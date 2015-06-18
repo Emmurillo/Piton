@@ -11,7 +11,7 @@ try:
     fo = open("Examples/" + file +".pi", "r")
     s = fo.read()
 
-    lexer.input(s)
+    """lexer.input(s)
 
     for tok in iter(lex.token, None):
         # print repr(tok.type), ":", repr(tok.value)
@@ -21,7 +21,7 @@ try:
     for i in range(largo):
         print "Caracter invalido:", errores[i].value[0], "en la linea:", errores[i].lineno
     lexer.lineno = 1
-
+"""
     yacc.parse(
     input = s,
     lexer = lexer,

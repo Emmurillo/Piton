@@ -79,12 +79,14 @@ def t_RESERVED(t):
 # Expresion regular para los ID's
 def t_ID(t):
     r'[a-zA-Z_$][a-zA-Z_0-9]*'
+    t[0] = t[1]
     return t
 
 # Expresion regular para los enteros
 def t_INT(t):
     r"\d+"
     t.value = int(t.value)
+    print "Num detected ", t.value
     return t
 
 # Expresiones regulares de las palabras reservadas
@@ -115,6 +117,7 @@ t_ignore = ' \t'
 
 def t_error(t):
     t.lexer.skip(1)
+    print
     errores.append(t)
 
 # Para llevar control del numero de linea que se lee, asi se indica en caso de error
