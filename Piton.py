@@ -43,7 +43,7 @@ class bcolors:
 
 tokens = [
     'CONDICIONAL_SI','CONDICIONAL_ENTONCES',
-    'BUCLE_MIENTRAS','BUCLE_PARA','PARE','BUCLE_SIGA',
+    'BUCLE_MIENTRAS','BUCLE_PARA','PARE',
     'MUESTRE','LEER',
     'ALEATORIO','LARGO',
     'VARIABLE','VALOR_ENTERO','VALOR_CADENA','VALOR_BOOLEANO',
@@ -107,9 +107,6 @@ def t_PARE(t):
     r'pare'  
     return t
 
-def t_BUCLE_SIGA(t):
-    r'continue'  
-    return t
 
 def t_MUESTRE(t):
     r'muestre' 
@@ -602,10 +599,6 @@ def p_regla_identificador(t):
 
 def p_regla_bucle_terminar(t):
     'sentencia : PARE'
-    t[0] = t[1]
-
-def p_regla_bucle_seguir(t):
-    'sentencia : BUCLE_SIGA'
     t[0] = t[1]
 
 def p_regla_bucle_para(t):
