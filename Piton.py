@@ -4,8 +4,11 @@
 # Librerias y configuracion
 import sys
 
+from random import randint
+
 import re
 sys.path.insert(0,"../..")
+
 
 if sys.version_info[0] >= 3:
     raw_input = input
@@ -40,7 +43,8 @@ class bcolors:
 tokens = [
     'CONDICIONAL_SI','CONDICIONAL_ENTONCES',
     'BUCLE_MIENTRAS','BUCLE_PARA','PARE','BUCLE_SIGA',
-    'IMPRIMIR','LEER',
+    'MUESTRE','LEER',
+    'ALEATORIO',
     'VARIABLE','VALOR_ENTERO','VALOR_CADENA','VALOR_BOOLEANO',
     'PARENTESIS_IZQUIERDO','PARENTESIS_DERECHO',
     'INICIO_SEGMENTO','FIN_SEGMENTO',
@@ -107,12 +111,16 @@ def t_BUCLE_SIGA(t):
     r'continue' # Equivalente al continue de python
     return t
 
-def t_IMPRIMIR(t):
-    r'imprimir'# Equivalente al print de python
+def t_MUESTRE(t):
+    r'muestre'# Equivalente al print de python
     return t
 
 def t_LEER(t):
     r'leer'# Equivalente al input de python
+    return t
+
+def t_ALEATORIO(t):
+    r'aleatorio'# Equivalente al input de python
     return t
 
 def t_OPERADOR_LOGICO(t):
@@ -342,10 +350,9 @@ def p_regla_sentencias_lectura2(t):
                     names[t[3]] = str(entrada)
             except:
                 errores+= "\nSEMANTICO: Tipo de dato desconocido. Linea: "+ str(lineCountSemantic)
-    
 
 def p_regla_sentencias_escritura(t):
-    'sentencia : IMPRIMIR PARENTESIS_IZQUIERDO lista_expresion PARENTESIS_DERECHO'
+    'sentencia : MUESTRE PARENTESIS_IZQUIERDO lista_expresion PARENTESIS_DERECHO'
     global errores
     try:
         print ">", t[3]
@@ -353,12 +360,18 @@ def p_regla_sentencias_escritura(t):
         errores+="\nSEMANTICO: Variable indefinida. Linea: "+str(lineCountSemantic)
 
 def p_regla_sentencias_escritura2(t):
-    'sentencia : IMPRIMIR PARENTESIS_IZQUIERDO VARIABLE PARENTESIS_DERECHO'
+    'sentencia : MUESTRE PARENTESIS_IZQUIERDO VARIABLE PARENTESIS_DERECHO'
     global errores
     try:
         print ">", names[t[3]]
     except:
         errores+="\nSEMANTICO: Variable indefinida. Linea: "+str(lineCountSemantic)
+        
+def p_regla_aleatorio(t):
+    'sentencia : ALEATORIO PARENTESIS_IZQUIERDO VARIABLE PARENTESIS_DERECHO'
+    random = randint(1,100)
+    val = random
+    names[t[3]] = random
 
 
 def p_regla_excepcionales(t):
@@ -623,7 +636,7 @@ def verificarErrores(errores):
 
 
 # Archivo para analizar
-file = "Examples/micodigo3"
+file = "Examples/micodigo4"
 
 with open (file+".pi", "r") as myfile:
     data=myfile.read()

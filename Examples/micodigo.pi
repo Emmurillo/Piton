@@ -3,8 +3,8 @@ a = 0
 pare
 b = 4 / 2
 si(x == 4):
-    imprimir("Verdadero")
+    muestre("Verdadero")
     ;
 entonces:
-    imprimir("Falso")
+    muestre("Falso")
 ;
