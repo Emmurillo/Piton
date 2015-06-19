@@ -41,7 +41,7 @@ tokens = [
     'CONDICIONAL_SI','CONDICIONAL_ENTONCES',
     'BUCLE_MIENTRAS','BUCLE_PARA','PARE','BUCLE_SIGA',
     'IMPRIMIR','LEER',
-    'VARIABLE','VALOR_ENTERO','VALOR_FLOTANTE','VALOR_CADENA','VALOR_BOOLEANO',
+    'VARIABLE','VALOR_ENTERO','VALOR_CADENA','VALOR_BOOLEANO',
     'PARENTESIS_IZQUIERDO','PARENTESIS_DERECHO',
     'INICIO_SEGMENTO','FIN_SEGMENTO',
     'PARENTESIS_CUADRADO_IZQUIERDO','PARENTESIS_CUADRADO_DERECHO','COMA','OPERACION_ASIGNACION',
@@ -49,16 +49,6 @@ tokens = [
     'OPERADOR_LOGICO','COMPARADOR_LOGICO','OPERADOR_ASERCION','EXCEPCIONAL_TRY','EXCEPCIONAL_EXCEPT',
     'OPERADOR_INCLUSION','FUNCION','FIN_ARCHIVO', 'COMENTARIOS','IMPORTACION_BIBLIOTECA',
     'ASIGNACION_PUNTERO','OPERACION_MODULO','RANGO']
-
-errores = "\n____________________________________________"+ \
-                 "\n\nLISTA DE ERRORES\n"           # Es un string que imprimir al final cuales fueron los errores léxicos
-comp = "\n____________________________________________"+ \
-             "\n\nLISTA DE ERRORES\n"   
-
-
-
-lineCount=0
-lineCountSemantic = 0
 
 
 
@@ -190,16 +180,6 @@ def t_VALOR_ENTERO(t):
         t.value = 0
     return t
 
-#Definición de un valor flotante(Expresiones regulares utilizadas de la biblioteca re)
-def t_VALOR_FLOTANTE(t):
-    r'[-+]?(?:\b[0-9]+(?:\.[0-9]*)?|\.[0-9]+\b)(?:[eE][-+]?[0-9]+\b)?'
-    try:
-        t.value = float(t.value)
-    except ValueError:
-        print("Flotante no valido: %s" % t.value)
-        t.value = 0
-    return t
-
 #Definición de un valor string
 def t_VALOR_CADENA(t):
     r'\"([^\\"]|(\\.))*\"'
@@ -226,6 +206,18 @@ def t_VALOR_CADENA(t):
 
 
 t_ignore = " "
+
+
+errores = "\n____________________________________________"+ \
+                 "\n\nLISTA DE ERRORES\n"      
+    # String para comparar el tamano
+comp = "\n____________________________________________"+ \
+             "\n\nLISTA DE ERRORES\n"   
+
+
+
+lineCount = 0
+lineCountSemantic = 0
 
 #Definición de cambio de linea
 def t_DELIMITADOR(t):
@@ -356,7 +348,7 @@ def p_regla_sentencias_escritura(t):
     'sentencia : IMPRIMIR PARENTESIS_IZQUIERDO lista_expresion PARENTESIS_DERECHO'
     global errores
     try:
-        print(t[3])
+        print ">", t[3]
     except:
         errores+="\nSEMANTICO: Variable indefinida. Linea: "+str(lineCountSemantic)
 
@@ -364,7 +356,7 @@ def p_regla_sentencias_escritura2(t):
     'sentencia : IMPRIMIR PARENTESIS_IZQUIERDO VARIABLE PARENTESIS_DERECHO'
     global errores
     try:
-        print(names[t[3]])
+        print ">", names[t[3]]
     except:
         errores+="\nSEMANTICO: Variable indefinida. Linea: "+str(lineCountSemantic)
 
@@ -517,10 +509,6 @@ def p_regla_numero(t):
     'expresion : VALOR_ENTERO'
     t[0] = t[1]
 
-def p_regla_flotante(t):
-    'expresion : VALOR_FLOTANTE'
-    t[0] = t[1]
-
 def p_regla_booleano(t):
     'expresion : VALOR_BOOLEANO'
     t[0]=t[1]
@@ -539,14 +527,6 @@ def p_regla_constantes_enteras(t):
 
 def p_regla_constantes_enteras_end(t):
     'lista_constantes : VALOR_ENTERO'
-    t[0] = t[1]
-
-def p_regla_constantes_flotantes(t):
-    'lista_constantes : VALOR_FLOTANTE COMA lista_constantes'
-    t[0] = t[1]
-
-def p_regla_constantes_floantes_end(t):
-    'lista_constantes : VALOR_FLOTANTE'
     t[0] = t[1]
 
 def p_regla_constantes_cadenas(t):
@@ -643,7 +623,7 @@ def verificarErrores(errores):
 
 
 # Archivo para analizar
-file = "Examples/micodigo"
+file = "Examples/micodigo3"
 
 with open (file+".pi", "r") as myfile:
     data=myfile.read()
@@ -661,10 +641,6 @@ while True:
 
     print tok.value, '\t\t', tok.type
     
-# Imprimir la tabla de simbolos
-print("TABLA DE SIMBOLOS")
-for name in names:
-    print name, '\t\t'
 
 # Reestablecer el contador
 
