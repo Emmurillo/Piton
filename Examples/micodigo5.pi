@@ -1,2 +1,4 @@
 x = "hola mundo"
-largo(x)
+y = 0
+largo(x,y) # Asigar el largo de x a y
+muestre(y)

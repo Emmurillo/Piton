@@ -361,7 +361,7 @@ def p_regla_sentencias_escritura(t):
     try:
         print ">", t[3]
     except:
-        errores+="\nSEMANTICO: Variable indefinida. Linea: "+str(lineCountSemantic)
+        errores+="\nSEMANTICO: Variable " + str(t[3]) + " indefinida. Linea: "+str(lineCountSemantic)
 
 def p_regla_sentencias_escritura2(t):
     'sentencia : MUESTRE PARENTESIS_IZQUIERDO VARIABLE PARENTESIS_DERECHO'
@@ -369,7 +369,7 @@ def p_regla_sentencias_escritura2(t):
     try:
         print ">", names[t[3]]
     except:
-        errores+="\nSEMANTICO: Variable indefinida. Linea: "+str(lineCountSemantic)
+        errores+="\nSEMANTICO: Variable " + str(t[3]) + " indefinida. Linea: "+str(lineCountSemantic)
         
 def p_regla_aleatorio(t):
     'sentencia : ALEATORIO PARENTESIS_IZQUIERDO VARIABLE PARENTESIS_DERECHO'
@@ -378,13 +378,16 @@ def p_regla_aleatorio(t):
     names[t[3]] = random
     
 def p_regla_largo(t):
-    'sentencia : LARGO PARENTESIS_IZQUIERDO VARIABLE PARENTESIS_DERECHO'
+    'sentencia : LARGO PARENTESIS_IZQUIERDO VARIABLE COMA VARIABLE PARENTESIS_DERECHO'
     global errores
-    var = names[t[3]]
-    if isinstance(var,str):
-        print ">", len(var)
+    if not (t[5] in names) or not (t[3] in names):
+        errores+="\nSEMANTICO: Variable (" + str(t[3]) + " o " + str(t[5]) + ") indefinida. Linea: "+str(lineCountSemantic)
     else:
-        errores+="\nSEMANTICO: El parametro de largo debe ser una cadena. Linea: "+str(lineCountSemantic)
+        var = names[t[3]]
+        if isinstance(var,str):
+            names[t[5]] = len(var)
+        else:
+            errores+="\nSEMANTICO: El parametro de largo debe ser una cadena. Linea: "+str(lineCountSemantic)
 
 
 def p_regla_excepcionales(t):
@@ -659,7 +662,8 @@ lexer.input(data)
 
 
 # Imprimir los tokens encontrados
-print("LISTA DE TOKENS")
+print "\n____________________________________________\n"
+print bcolors.HEADER, "LISTA DE TOKENS", bcolors.ENDC
 while True:
     tok = lexer.token()
     if not tok: 
@@ -676,6 +680,12 @@ lineCountSemantic = 0
 print("\n\n")
 yacc.parse(data)
 print("\n\n")
+
+print "\n____________________________________________\n"
+print bcolors.HEADER, "TABLA DE SIMBOLOS", bcolors.ENDC
+
+for sym in names:
+    print '\t', "Simbolo: ",  sym, " Valor:", names[sym]
 
 verificarErrores(errores) 
 
