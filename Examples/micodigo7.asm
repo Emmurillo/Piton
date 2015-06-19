@@ -1,6 +1,6 @@
 
 SECTION .data
-	xMsg: db "hola mundo",10
+	xMsg: db "Esteban",10
 	xLen: equ $-xMsg
 	c	dw	9
 	f	dw	9
@@ -29,11 +29,6 @@ _start:
 	mov 	eax,4
 	mov 	ebx,1
 	mov 	ecx,"listo"
-	int 	80H
-
-	mov 	eax,4
-	mov 	ebx,1
-	mov 	ecx,"8"
 	int 	80H
 
 	mov 	eax,4
