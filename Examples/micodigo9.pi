@@ -1,0 +1,7 @@
+x = "Por favor inserte su nombre"
+muestre(x)
+leer(x)
+muestre("El largo de su nombre es: ")
+c = 0
+largo()
+muestre(x)

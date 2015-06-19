@@ -329,20 +329,20 @@ def p_regla_asignar2(t):
     
 def p_regla_sentencias_lectura(t):
     'sentencia : LEER PARENTESIS_IZQUIERDO lista_variables PARENTESIS_DERECHO'
-    entrada=input()
+    entrada = raw_input()
     names[t[3]] = entrada
 
 def p_regla_sentencias_lectura2(t):
     'sentencia : LEER PARENTESIS_IZQUIERDO VARIABLE PARENTESIS_DERECHO'
     global errores
-    entrada=input()
+    entrada = raw_input()
     try:
-        val = int(entrada)
-        names[t[3]] = int(entrada)
+        val = str(entrada)
+        names[t[3]] = str(entrada)
     except ValueError:
         try:
-            val = float(entrada)
-            names[t[3]] = float(entrada)
+            val = str(entrada)
+            names[t[3]] = str(entrada)
         except ValueError:
             try:
                 val = str(entrada)

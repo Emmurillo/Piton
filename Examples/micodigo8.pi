@@ -1,0 +1,13 @@
+defina factorial ():
+    x = 6
+    si (x == 0):
+        muestre(1)
+    ;
+    resp = 1
+    cont = 1
+    mientras(cont < x):
+        resp = resp * cont
+        cont = cont + 1
+    ;
+    muestre(resp)
+;

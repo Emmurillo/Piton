@@ -1,11 +1,8 @@
 
 SECTION .data
-	xMsg: db "hola dos",10
-	xLen: equ $-xMsg
-	cMsg: db "hola mundo",10
-	cLen: equ $-cMsg
-	hola	dw	5
-	f	dw	9
+	x	dw	6
+	resp	dw	1
+	cont	dw	2
 
 SECTION .text
 
@@ -19,14 +16,13 @@ _start:
 
 	mov 	eax,4
 	mov 	ebx,1
-	mov 	ecx,cMsg
-	mov 	edx,cLen
+	mov 	ecx,"1"
 	int 	80H
 
 	mov 	eax,4
 	mov 	ebx,1
-	mov 	ecx,cMsg
-	mov 	edx,cLen
+	mov 	ecx,respMsg
+	mov 	edx,respLen
 	int 	80H
 
 	mov     eax,1

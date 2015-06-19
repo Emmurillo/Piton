@@ -1,12 +1,10 @@
-x = "hola mundo"
-c = 0
+x = "hola " + "dos"
+c = 0,
 largo(x,c) # Asigar el largo de x a y
 muestre(c)
-muestre("listo")
-muestre(8)
-si(x > 2 amb verdadero):
-    muestre("Verdadero")
-    ;
+muestre(,)
 f = 9
-c = f
+c = f + "hola"
 muestre(c)
+c = "hola mundo"
+hola = 5
