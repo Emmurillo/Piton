@@ -2,12 +2,10 @@ defina hola(d, k):
     muestre("Hola mundo")
 ;
 
-x = "hola mundo"
-c = 0
+x = "Esteban"
 largo(x,c) # Asigar el largo de x a y
 muestre(c)
 muestre("listo")
-muestre(8)
 si(x > 2 amb verdadero):
     muestre("Verdadero")
     ;
