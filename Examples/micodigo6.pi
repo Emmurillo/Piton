@@ -4,7 +4,7 @@ largo(x,c) # Asigar el largo de x a y
 muestre(c)
 muestre("listo")
 muestre(8)
-si(x == 2):
+si(x > 2 amb verdadero):
     muestre("Verdadero")
     ;
 f = 9

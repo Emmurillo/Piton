@@ -52,8 +52,7 @@ tokens = [
     'PARENTESIS_CUADRADO_IZQUIERDO','PARENTESIS_CUADRADO_DERECHO','COMA','OPERACION_ASIGNACION',
     'OPERACION_SUMA','OPERACION_RESTA','OPERACION_MULTIPLICACION','OPERACION_DIVISION','OPERACION_POTENCIA',
     'OPERADOR_LOGICO','COMPARADOR_LOGICO','OPERADOR_ASERCION','EXCEPCIONAL_TRY','EXCEPCIONAL_EXCEPT',
-    'OPERADOR_INCLUSION','FUNCION','FIN_ARCHIVO', 'COMENTARIOS','IMPORTACION_BIBLIOTECA',
-    'ASIGNACION_PUNTERO','OPERACION_MODULO','RANGO']
+    'OPERADOR_INCLUSION','FUNCION','FIN_ARCHIVO', 'COMENTARIOS','OPERACION_MODULO','RANGO']
 
 
 
@@ -73,7 +72,7 @@ t_OPERACION_MULTIPLICACION     = r'\*'
 t_OPERACION_DIVISION  = r'/'
 t_COMA     = r'\,'
 t_OPERACION_ASIGNACION  = r'='
-t_COMPARADOR_LOGICO     = r'==|!=|<|>|<=|>='
+t_COMPARADOR_LOGICO     = r'==|!=|<|>'
 t_PARENTESIS_IZQUIERDO  = r'\('
 t_PARENTESIS_DERECHO  = r'\)'
 t_FIN_ARCHIVO    = r'\EOF'
@@ -129,7 +128,7 @@ def t_LARGO(t):
     return t
 
 def t_OPERADOR_LOGICO(t):
-    r'&&|//|!!'  
+    r'amb|alg|negar'  
     return t
 
 def t_VALOR_BOOLEANO(t):
@@ -152,16 +151,8 @@ def t_OPERADOR_INCLUSION(t):
     r'entre'  
     return t
 
-def t_IMPORTACION_BIBLIOTECA(t):
-    r'importar'  
-    return t
-
 def t_FUNCION(t):
     r'funcion'  
-    return t
-
-def t_ASIGNACION_PUNTERO(t):
-    r'asigne'  
     return t
 
 def t_OPERACION_POTENCIA(t):
@@ -338,11 +329,7 @@ def p_regla_asignar2(t):
     code_segment += "\tmov \t" + str(t[1]) + ", eax\n"
     code_segment += "\txor \teax, eax\n"
     
-
-def p_regla_asignar_puntero(t):
-    'sentencia : VARIABLE ASIGNACION_PUNTERO expresion'
-    names[t[1]] = t[3]
-
+    
 def p_regla_sentencias_lectura(t):
     'sentencia : LEER PARENTESIS_IZQUIERDO lista_variables PARENTESIS_DERECHO'
     entrada=input()
@@ -441,14 +428,14 @@ def p_regla_comparador(t):
     else:
         t[3]=False
     if(((isinstance(t[1],bool) and (isinstance(t[3],bool))))):
-        if t[2] == '&&':
+        if t[2] == 'amb':
             t[0] = t[1] and t[3]
             if t[0]:
                 t[0] = "verdadero"
             else:
                 t[0] = "falso"
             
-        elif t[2] == '//':
+        elif t[2] == 'alg':
             t[0] = t[1] or t[3]
             if t[0]:
                 t[0] = "verdadero"
@@ -462,9 +449,9 @@ def p_regla_comparador(t):
 def p_regla_comparador_no(t):
     'expresion : OPERADOR_LOGICO expresion'
     global errores
-    if t[2] == "verdadero" and t[1] == '!!':
+    if t[2] == "verdadero" and t[1] == 'negar':
         t[0] = "falso"
-    elif t[2] == "falso" and t[1] == '!!':
+    elif t[2] == "falso" and t[1] == 'negar':
         t[0] = "verdadero"
     else:
         errores += "\nSINTACTICO: Operador necesario en la expresion. Linea: " + str(lineCountSemantic)
@@ -611,11 +598,6 @@ def p_regla_identificador(t):
     else:
         errores+="\nSEMANTICO: Variable "+ str(t[1]) + " indefinida. Linea: " + str(lineCountSemantic)
 
-
-def p_regla_importacion(t):
-    'sentencia : IMPORTACION_BIBLIOTECA VARIABLE'
-    t[0] = t[2]
-
 # Reglas para instrucciones iterativas
 
 def p_regla_bucle_terminar(t):
@@ -691,7 +673,7 @@ def generarEnsamblador():
 path = raw_input("Cual archivo de Piton desea ejecutar?\n")
 
 # Archivo para analizar
-file = "Examples/" + path
+file = "Examples/micodigo" + path
 
 with open (file + ".pi", "r") as myfile:
     cod = myfile.read()
