@@ -44,7 +44,7 @@ tokens = [
     'CONDICIONAL_SI','CONDICIONAL_ENTONCES',
     'BUCLE_MIENTRAS','BUCLE_PARA','PARE','BUCLE_SIGA',
     'MUESTRE','LEER',
-    'ALEATORIO',
+    'ALEATORIO','LARGO',
     'VARIABLE','VALOR_ENTERO','VALOR_CADENA','VALOR_BOOLEANO',
     'PARENTESIS_IZQUIERDO','PARENTESIS_DERECHO',
     'INICIO_SEGMENTO','FIN_SEGMENTO',
@@ -121,6 +121,10 @@ def t_LEER(t):
 
 def t_ALEATORIO(t):
     r'aleatorio'# Equivalente al input de python
+    return t
+
+def t_LARGO(t):
+    r'largo'# Equivalente al input de python
     return t
 
 def t_OPERADOR_LOGICO(t):
@@ -372,6 +376,15 @@ def p_regla_aleatorio(t):
     random = randint(1,100)
     val = random
     names[t[3]] = random
+    
+def p_regla_largo(t):
+    'sentencia : LARGO PARENTESIS_IZQUIERDO VARIABLE PARENTESIS_DERECHO'
+    global errores
+    var = names[t[3]]
+    if isinstance(var,str):
+        print ">", len(var)
+    else:
+        errores+="\nSEMANTICO: El parametro de largo debe ser una cadena. Linea: "+str(lineCountSemantic)
 
 
 def p_regla_excepcionales(t):
@@ -636,7 +649,7 @@ def verificarErrores(errores):
 
 
 # Archivo para analizar
-file = "Examples/micodigo4"
+file = "Examples/micodigo5"
 
 with open (file+".pi", "r") as myfile:
     data=myfile.read()
