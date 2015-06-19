@@ -643,7 +643,7 @@ def verificarErrores(errores):
 
 
 # Archivo para analizar
-file = "micodigo"
+file = "Examples/micodigo"
 
 with open (file+".pi", "r") as myfile:
     data=myfile.read()
