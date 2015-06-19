@@ -2,3 +2,5 @@ x = "hola mundo"
 y = 0
 largo(x,y) # Asigar el largo de x a y
 muestre(y)
+muestre("listo")
+muestre(8)

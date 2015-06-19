@@ -3,6 +3,7 @@
 
 # Librerias y configuracion
 import sys
+import os
 
 from random import randint
 
@@ -82,94 +83,92 @@ t_PARENTESIS_CUADRADO_IZQUIERDO = r'\['
 t_PARENTESIS_CUADRADO_DERECHO = r'\]'
 t_OPERACION_MODULO = r'\%'
 
-#Palabras Reservadas
+# Definicion de las regex palabras reservadas
 def t_CONDICIONAL_SI(t):
-    r'si' # Equivalente al if de python
+    r'si'  
     return t
 
 def t_CONDICIONAL_ENTONCES(t):
-    r'entonces' # Equivalente al else de python
+    r'entonces'  
     return t
 
 def t_BUCLE_MIENTRAS(t):
-    r'mientras' # Equivalente al while de python
+    r'mientras'  
     return t
 
 def t_RANGO(t):
-    r'rango' # Equivalente al range de python
+    r'rango'  
     return t
 
 def t_BUCLE_PARA(t):
-    r'para' # Equivalente al for de python
+    r'para'  
     return t
 
 def t_PARE(t):
-    r'pare' # Equivalente al break de python
+    r'pare'  
     return t
 
 def t_BUCLE_SIGA(t):
-    r'continue' # Equivalente al continue de python
+    r'continue'  
     return t
 
 def t_MUESTRE(t):
-    r'muestre'# Equivalente al print de python
+    r'muestre' 
     return t
 
 def t_LEER(t):
-    r'leer'# Equivalente al input de python
+    r'leer' 
     return t
 
 def t_ALEATORIO(t):
-    r'aleatorio'# Equivalente al input de python
+    r'aleatorio' 
     return t
 
 def t_LARGO(t):
-    r'largo'# Equivalente al input de python
+    r'largo' 
     return t
 
 def t_OPERADOR_LOGICO(t):
-    r'&&|//|!!' # Equivalente al and or y not de python
+    r'&&|//|!!'  
     return t
 
 def t_VALOR_BOOLEANO(t):
-    r'cierto|falso' # Equivalente al true/false de python
+    r'verdadero|falso'  
     return t
 
 def t_OPERADOR_ASERCION(t):
-    r'acierto' # Equivalente al assert de python
+    r'acierto'  
     return t
 
 def t_EXCEPCIONAL_TRY(t):
-    r'intente' # Equivalente al try de python
+    r'intente'  
     return t
 
 def t_EXCEPCIONAL_EXCEPT(t):
-    r'excepcion' # Equivalente al except de python
+    r'excepcion'  
     return t
 
 def t_OPERADOR_INCLUSION(t):
-    r'entre' # Equivalente al in(si un elemento esta dentro de la lista) de python
+    r'entre'  
     return t
 
 def t_IMPORTACION_BIBLIOTECA(t):
-    r'importar' # Equivalente al import de python
+    r'importar'  
     return t
 
 def t_FUNCION(t):
-    r'funcion' # Equivalente al def de python
+    r'funcion'  
     return t
 
 def t_ASIGNACION_PUNTERO(t):
-    r'asigne' # Equivalente al is(asignacion dinámica) de python
+    r'asigne'  
     return t
 
 def t_OPERACION_POTENCIA(t):
-    r'eleva' # Equivalente al pow de python
+    r'eleva'  
     return t
 
 
-
-# Definicion de variable (utiliza el formato estandar de python)
 def t_VARIABLE(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     
@@ -177,12 +176,11 @@ def t_VARIABLE(t):
     
     return t
 
-#Comentarios
+
 def t_COMENTARIOS(t):
     r'\#.*'
-    pass #Se desecha el token por que los comentarios no tienen ningun valor
+    pass
 
-#Definición de un valor entero
 def t_VALOR_ENTERO(t):
     r'-?\d+'
     try:
@@ -192,10 +190,10 @@ def t_VALOR_ENTERO(t):
         t.value = 0
     return t
 
-#Definición de un valor string
+
 def t_VALOR_CADENA(t):
     r'\"([^\\"]|(\\.))*\"'
-    escape = 0 # Verfica los caracteres de escape
+    escape = 0
     str = t.value[1:-1]
     nueva_cadena = ""
     for i in range(0, len(str)):
@@ -221,8 +219,8 @@ t_ignore = " "
 
 
 errores = "\n____________________________________________"+ \
-                 "\n\nLISTA DE ERRORES\n"      
-    # String para comparar el tamano
+                 "\n\nLISTA DE ERRORES\n"  
+    
 comp = "\n____________________________________________"+ \
              "\n\nLISTA DE ERRORES\n"   
 
@@ -231,7 +229,7 @@ comp = "\n____________________________________________"+ \
 lineCount = 0
 lineCountSemantic = 0
 
-#Definición de cambio de linea
+
 def t_DELIMITADOR(t):
     r'\n+'
     global lineCount
@@ -242,7 +240,7 @@ def t_DELIMITADOR(t):
     else:
         lineCountSemantic+= t.value.count("\n")
 
-#Verifica si el token no genera las expresiones regulares definidas    
+        
 def t_error(t):
     global errores
     global lineCount
@@ -265,7 +263,6 @@ lexer = lex.lex(optimize = 1)
 #                                                                 
 
 
-# Parsing de las reglas de la gramatica
 
 precedence = (
     ('left','OPERACION_POTENCIA'),
@@ -274,10 +271,23 @@ precedence = (
     ('right','UMINUS'),
     )
 
-# diccionario de identificadores
+
 names = { }
 
-# Reglas de la gramatica
+# Variables de segmentos de asm
+
+data_segment = "\nSECTION .data\n"
+code_segment = "\nSECTION .text\n"
+code_segment += "\nglobal _start\n"
+code_segment += "\n_start:\n"
+code_segment += "\t nop\n" 
+code_segment += "\t mov     ax,data\n" 
+code_segment += "\t mov     ds,ax\n" 
+code_segment += "\t xor     ax,ax\n"
+end_code = "\n\tmov     eax,1\n"
+end_code += "\tmov     ebx,0\n"
+end_code += "\tint     80H\n"
+
 
 def p_regla_programa(t):
     'programa : lista_sentencias'
@@ -311,8 +321,8 @@ def p_regla_funciones3(t):
 def p_regla_asignar(t):
     'sentencia : VARIABLE OPERACION_ASIGNACION expresion'
     val = str(t[3])
-    if val == "cierto":
-        names[t[1]] = "cierto"
+    if val == "verdadero":
+        names[t[1]] = "verdadero"
     elif val == "falso":
         names[t[1]] = "falso"
     else:
@@ -321,7 +331,13 @@ def p_regla_asignar(t):
 
 def p_regla_asignar2(t):
     'sentencia : VARIABLE OPERACION_ASIGNACION VARIABLE'
+    global code_segment
     names[t[1]] = names[t[3]]
+    #asm
+    code_segment += "\n\ttmov \teax," + str(t[3]) + "\n"
+    code_segment += "\tmov \t" + str(t[1]) + ", eax\n"
+    code_segment += "\txor \teax, eax\n"
+    
 
 def p_regla_asignar_puntero(t):
     'sentencia : VARIABLE ASIGNACION_PUNTERO expresion'
@@ -346,8 +362,8 @@ def p_regla_sentencias_lectura2(t):
         except ValueError:
             try:
                 val = str(entrada)
-                if val == "cierto":
-                    names[t[3]] = "cierto"
+                if val == "verdadero":
+                    names[t[3]] = "verdadero"
                 elif val == "falso":
                     names[t[3]] = "falso"
                 else:
@@ -358,7 +374,12 @@ def p_regla_sentencias_lectura2(t):
 def p_regla_sentencias_escritura(t):
     'sentencia : MUESTRE PARENTESIS_IZQUIERDO lista_expresion PARENTESIS_DERECHO'
     global errores
+    global code_segment
     try:
+        code_segment += "\n\tmov \teax,4\n"        
+        code_segment += "\tmov \tebx,1\n"
+        code_segment += "\tmov \tecx,\"" + str(t[3]) + "\"\n"
+        code_segment += "\tint \t80H\n"  
         print ">", t[3]
     except:
         errores+="\nSEMANTICO: Variable " + str(t[3]) + " indefinida. Linea: "+str(lineCountSemantic)
@@ -366,8 +387,14 @@ def p_regla_sentencias_escritura(t):
 def p_regla_sentencias_escritura2(t):
     'sentencia : MUESTRE PARENTESIS_IZQUIERDO VARIABLE PARENTESIS_DERECHO'
     global errores
+    global code_segment
     try:
-        print ">", names[t[3]]
+        code_segment += "\n\tmov \teax,4\n"        
+        code_segment += "\tmov \tebx,1\n"
+        code_segment += "\tmov \tecx," + str(t[3]) + "Msg\n"
+        code_segment += "\tmov \tedx," + str(t[3]) + "Len\n"
+        code_segment += "\tint \t80H\n"    
+        print ">", str(names[t[3]])    
     except:
         errores+="\nSEMANTICO: Variable " + str(t[3]) + " indefinida. Linea: "+str(lineCountSemantic)
         
@@ -405,11 +432,11 @@ def p_regla_condicional_entonces(t):
 def p_regla_comparador(t):
     'expresion : expresion OPERADOR_LOGICO expresion'
     global errores
-    if(t[1]=="cierto"):
+    if(t[1]=="verdadero"):
         t[1]=True
     else:
         t[1]=False
-    if(t[3]=="cierto"):
+    if(t[3]=="verdadero"):
         t[3]=True
     else:
         t[3]=False
@@ -417,14 +444,14 @@ def p_regla_comparador(t):
         if t[2] == '&&':
             t[0] = t[1] and t[3]
             if t[0]:
-                t[0] = "cierto"
+                t[0] = "verdadero"
             else:
                 t[0] = "falso"
             
         elif t[2] == '//':
             t[0] = t[1] or t[3]
             if t[0]:
-                t[0] = "cierto"
+                t[0] = "verdadero"
             else:
                 t[0] = "falso"
         
@@ -435,13 +462,13 @@ def p_regla_comparador(t):
 def p_regla_comparador_no(t):
     'expresion : OPERADOR_LOGICO expresion'
     global errores
-    if t[2] == "cierto" and t[1] == '!!':
+    if t[2] == "verdadero" and t[1] == '!!':
         t[0] = "falso"
     elif t[2] == "falso" and t[1] == '!!':
-        t[0] = "cierto"
+        t[0] = "verdadero"
     else:
-       errores += "\nSINTACTICO: Operador necesario en la expresion. Linea: " + str(lineCountSemantic)
-       t[0] = t[2]
+        errores += "\nSINTACTICO: Operador necesario en la expresion. Linea: " + str(lineCountSemantic)
+        t[0] = t[2]
     
     
 def p_regla_comparador2(t):
@@ -612,9 +639,6 @@ def p_regla_bucle_mientras(t):
     t[0] = t[3]
 
 
-#######################################################################################################################
-
-
 def p_regla_comentarios(t):
     'sentencia : sentencia COMENTARIOS'
     t[0] = t[1]
@@ -642,6 +666,19 @@ def verificarErrores(errores):
         #print errores
         print bcolors.OKGREEN,"\nTraducción finalizada sin errores\n", bcolors.ENDC
 
+
+#Procedimiento que toma los segmentos y los guarda en un archivo
+def generarEnsamblador():
+    global file
+    if(os.path.exists(file)):
+        os.remove(file + ".asm")
+    text_file = open(file + ".asm", "w")
+    text_file.write(data_segment)
+    text_file.write(code_segment)
+    text_file.write(end_code)
+    text_file.close()
+        
+        
 #  ███╗   ███╗ █████╗ ██╗███╗   ██╗
 #  ████╗ ████║██╔══██╗██║████╗  ██║
 #  ██╔████╔██║███████║██║██╔██╗ ██║
@@ -651,14 +688,16 @@ def verificarErrores(errores):
 #                                  
 
 
-# Archivo para analizar
-file = "Examples/micodigo5"
+path = raw_input("Cual archivo de Piton desea ejecutar?\n")
 
-with open (file+".pi", "r") as myfile:
-    data=myfile.read()
+# Archivo para analizar
+file = "Examples/" + path
+
+with open (file + ".pi", "r") as myfile:
+    cod = myfile.read()
 
 # Configurar entrada de lex
-lexer.input(data)
+lexer.input(cod)
 
 
 # Imprimir los tokens encontrados
@@ -678,15 +717,24 @@ while True:
 lineCount=1
 lineCountSemantic = 0
 print("\n\n")
-yacc.parse(data)
+yacc.parse(cod)
 print("\n\n")
 
 print "\n____________________________________________\n"
 print bcolors.HEADER, "TABLA DE SIMBOLOS", bcolors.ENDC
 
 for sym in names:
-    print '\t', "Simbolo: ",  sym, " Valor:", names[sym]
+    val = names[sym]
+    print '\t', "Simbolo: ",  sym, " Valor:", val
+    # asm
+    if isinstance(val, str):
+        data_segment += "\t" + sym + "Msg: db \"" + val + "\",10\n"
+        data_segment += "\t" + sym + "Len: equ $-" + sym + "Msg\n"
+    else:
+        data_segment += "\t" + sym + "\tdw\t" + str(val) + "\n" 
 
 verificarErrores(errores) 
+
+generarEnsamblador()
 
 
